@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using WarriorSystem;
 
 namespace Core
@@ -6,15 +8,16 @@ namespace Core
     public class Bootstrapper : MonoBehaviour
     {
         [SerializeField] private InputListener _inputListener;
-        [SerializeField] private AttackStrategySetter _attackStrategySetter;
-        [SerializeField] private Animator _animator;
-        private AttackPerformer _attackPerformer;
-        
+        [SerializeField] private EnemySwitcher _enemySwitcher;
+        private EnemyPool _enemyPool;
+        private EnemySpawnDataSO _enemySpawnData;
+
         private void Awake()
         {
-            _attackPerformer = new AttackPerformer(_animator);
-            _inputListener.Construct(_attackPerformer);
-            _attackStrategySetter.Construct(_attackPerformer);
+            _enemySpawnData = Resources.Load<EnemySpawnDataSO>("EnemySpawnData");
+            _enemyPool = new EnemyPool(_enemySpawnData.GetEnemyPrefabs());
+            _inputListener.Construct(_enemyPool);
+            _enemySwitcher.Construct(_enemyPool);
         }
     }
 }

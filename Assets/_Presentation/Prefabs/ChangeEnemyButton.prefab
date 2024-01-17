@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 5488580060266673425}
   - component: {fileID: 7229852844183584536}
   m_Layer: 5
-  m_Name: ChangeAttackStrategyButton
+  m_Name: ChangeEnemyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

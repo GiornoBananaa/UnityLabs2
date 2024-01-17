@@ -6,41 +6,43 @@ using UnityEngine.UI;
 
 namespace WarriorSystem
 {
-    public class AttackStrategySetter : MonoBehaviour
+    public class EnemySwitcher : MonoBehaviour
     {
         [SerializeField] private RectTransform _buttonsLayout;
         [SerializeField] private GameObject _buttonPrefab;
         [SerializeField] private ColorBlock _chosenButtonColors;
-        private AttackPerformer _attackPerformer;
+        private EnemyPool _enemyPool;
         private List<Button> _buttons;
         private Button _chosenButton;
         private ColorBlock _defaultButtonColors;
         
-        public void Construct(AttackPerformer attackPerformer)
+        public void Construct(EnemyPool enemyPool)
         {
-            _attackPerformer = attackPerformer;
+            _enemyPool = enemyPool;
         }
         
         private void Start()
         {
             _buttons = new List<Button>();
-            SpawnStrategyChangeButton(new AboveSwingAttack(), "AboveSwingAttack");
-            SpawnStrategyChangeButton(new BelowSwingAttack(),"BelowSwingAttack");
-            SpawnStrategyChangeButton(new SideSwingAttack(),"SideSwingAttack");
+            SpawnEnemyChangeButton(EnemyType.OneAttack, "One attack enemy");
+            SpawnEnemyChangeButton(EnemyType.Shooting,"Shooting enemy");
+            SpawnEnemyChangeButton(EnemyType.Controlled,"Controlled enemy");
         }
 
-        private void SpawnStrategyChangeButton(IAttackStrategy attackStrategy, string buttonText)
+        private void SpawnEnemyChangeButton(EnemyType enemyType, string buttonText)
         {
             GameObject buttonGameObject = Instantiate(_buttonPrefab,_buttonsLayout);
             Button button = buttonGameObject.GetComponent<Button>();
-            button.onClick.AddListener(() => SetStrategy(attackStrategy,button));
+            button.onClick.AddListener(() => SetEnemy(enemyType,button));
             button.GetComponentInChildren<TMP_Text>().text = buttonText;
             _buttons.Add(button);
         }
 
-        private void SetStrategy(IAttackStrategy attackStrategy, Button button)
+        private void SetEnemy(EnemyType enemyType, Button button)
         {
-            _attackPerformer.SetStrategy(attackStrategy);
+            if(_chosenButton == button) return;
+            
+            _enemyPool.SetEnemy(enemyType);
             if(_chosenButton!=null)
                 _chosenButton.colors = _defaultButtonColors;
             _defaultButtonColors = button.colors;

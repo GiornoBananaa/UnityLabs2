@@ -5,11 +5,11 @@ namespace WarriorSystem
     public class InputListener : MonoBehaviour
     {
         [SerializeField] private KeyCode _attackKeyCode;
-        private AttackPerformer _attackPerformer;
+        private EnemyPool _enemyPool;
         
-        public void Construct(AttackPerformer attackPerformer)
+        public void Construct(EnemyPool enemyPool)
         {
-            _attackPerformer = attackPerformer;
+            _enemyPool = enemyPool;
         }
         
         private void Update()
@@ -21,7 +21,7 @@ namespace WarriorSystem
         {
             if (Input.GetKeyDown(_attackKeyCode))
             {
-                _attackPerformer.PerformAttack();
+                _enemyPool.PerformAttack();
             }
         }
     }
