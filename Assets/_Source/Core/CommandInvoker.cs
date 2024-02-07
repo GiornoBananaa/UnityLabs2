@@ -26,8 +26,9 @@ namespace Core
         public void Undo()
         {
             if(_commandsHistory.Count==0) return;
-            CommandHistory history = _commandsHistory[^1];
+            CommandHistory history = _commandsHistory[_commandsHistory.Count-1];
             history.Command.Undo(history);
+            _commandsHistory.RemoveAt(_commandsHistory.Count-1);
         }
 
         private ICommand GetCommand<T>() where T: ICommand

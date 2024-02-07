@@ -17,7 +17,7 @@ namespace Core
             Vector2 currentDestination = _characterMovement.CurrentDestination;
             _characterMovement.MoveTo(position);
             MoveCommandHistory moveCommandHistory = new MoveCommandHistory(this, position, currentDestination);
-            Debug.Log(moveCommandHistory == null);
+            
             return moveCommandHistory;
         }
 

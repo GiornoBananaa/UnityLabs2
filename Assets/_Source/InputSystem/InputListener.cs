@@ -23,7 +23,7 @@ namespace InputSystem
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit);
+                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
                 _commandInvoker.Execute<MoveCommand>(hit.point);
             }
         }
@@ -31,13 +31,13 @@ namespace InputSystem
         {
             if (Input.GetMouseButtonDown(1))
             {
-                Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit);
+                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
                 _commandInvoker.Execute<SpawnCommand>(hit.point);
             }
         }
         private void CheckCommandUndo()
         {
-            if (Input.GetMouseButtonDown(3))
+            if (Input.GetMouseButtonDown(2))
             {
                 _commandInvoker.Undo();
             }
