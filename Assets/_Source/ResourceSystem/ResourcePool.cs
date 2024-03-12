@@ -33,7 +33,8 @@ namespace ResourceSystem
         
         public void Reset()
         {
-            foreach (var name in _resources.Keys)
+            List<string> keys = new List<string>(_resources.Keys);
+            foreach (var name in keys)
             {
                 _resources[name] = 0;
                 _valueChangedEvent.Notify(name,0);
