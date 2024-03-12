@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace EventSystem
 {
-    [CreateAssetMenu(fileName = "ResourceModifiedEvent", menuName = "SO/Resource Modified Event")]
-    public abstract class ResourcesResetEventSO : ScriptableObject, IObservable<IResetResourcesEventListener>
+    [CreateAssetMenu(fileName = "ResourceResetEvent", menuName = "SO/GameEvents/Resource Reset Event")]
+    public class ResourcesResetEventSO : ScriptableObject, IObservable<IResetResourcesEventListener>
     {
         private List<IResetResourcesEventListener> _listeners = new();
         

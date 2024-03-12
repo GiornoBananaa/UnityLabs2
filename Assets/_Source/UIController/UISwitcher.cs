@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Core;
 
-namespace Core
+namespace UIController
 {
     public class UISwitcher
     {

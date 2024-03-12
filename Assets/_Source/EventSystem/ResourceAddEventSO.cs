@@ -4,7 +4,7 @@ using UnityEngine;
 namespace EventSystem
 {
     [CreateAssetMenu(fileName = "ResourceAddEventSO",menuName = "SO/GameEvents/Resource Add Event")]
-    public abstract class ResourceAddEventSO: ScriptableObject, IObservable<IResourcesAddEventListener,string,int>
+    public class ResourceAddEventSO: ScriptableObject, IObservable<IResourcesAddEventListener,string,int>
     {
         private List<IResourcesAddEventListener> _listeners = new();
         

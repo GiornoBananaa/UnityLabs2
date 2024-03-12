@@ -4,7 +4,7 @@ using UnityEngine;
 namespace EventSystem
 {
     [CreateAssetMenu(fileName = "ResourceRemoveEventSO", menuName = "SO/GameEvents/Resource Remove Event")]
-    public abstract class ResourceRemoveEventSO : ScriptableObject, IObservable<IResourcesRemovedEventListener,string,int>
+    public class ResourceRemoveEventSO : ScriptableObject, IObservable<IResourcesRemovedEventListener,string,int>
     {
     private List<IResourcesRemovedEventListener> _listeners = new();
         

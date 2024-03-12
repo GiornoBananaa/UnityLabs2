@@ -4,6 +4,7 @@ using MenuView;
 using ResourceSystem;
 using UIController;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Core
 {
@@ -17,6 +18,8 @@ namespace Core
         [SerializeField] private ResourceAddEventSO _addGameEvent;
         [SerializeField] private ResourceRemoveEventSO _removeGameEvent;
         [SerializeField] private ResourcesResetEventSO _resetGameEvent;
+        [SerializeField] private ResourceModifiedEventSO _modifiedGameEvent;
+        [SerializeField] private MenuSelectionBar _menuMenuSelectionBar;
 
         private UISwitcher _uiSwitcher;
         
@@ -30,9 +33,15 @@ namespace Core
             };
             ResourcesDataSO resourcesDataSO = Resources.Load<ResourcesDataSO>(ResourcesDataPath);
             _uiSwitcher = new UISwitcher(controllers);
+            _menuMenuSelectionBar.Construct(_uiSwitcher);
+            ResourcePool resourcePool = new ResourcePool(_modifiedGameEvent,resourcesDataSO.Resources);
+            _removeGameEvent.RegisterObserver(resourcePool);
+            _resetGameEvent.RegisterObserver(resourcePool);
+            _addGameEvent.RegisterObserver(resourcePool);
+            _modifiedGameEvent.RegisterObserver(_mainMenuView);
             _addMenuView.Construct(_addGameEvent,resourcesDataSO.Resources);
             _removeMenuView.Construct(_removeGameEvent,resourcesDataSO.Resources);
-            _mainMenuView.Construct(_resetGameEvent);
+            _mainMenuView.Construct(_resetGameEvent,resourcesDataSO.Resources);
         }
     }
 }

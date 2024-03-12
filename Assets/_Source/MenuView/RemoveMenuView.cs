@@ -1,7 +1,6 @@
-using Core;
 using EventSystem;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace MenuView
@@ -10,8 +9,8 @@ namespace MenuView
     {
         [SerializeField] private GameObject _menuPanel;
         [SerializeField] private Button _removeButton;
-        [SerializeField] private Dropdown _resourcesDropdown;
-        [SerializeField] private InputField _countInputField;
+        [SerializeField] private TMP_Dropdown _resourcesDropdown;
+        [SerializeField] private TMP_InputField _countInputField;
         
         private ResourceRemoveEventSO _removeEventSo;
         
@@ -21,7 +20,7 @@ namespace MenuView
             _resourcesDropdown.ClearOptions();
             foreach (var name in resources)
             {
-                _resourcesDropdown.options.Add(new Dropdown.OptionData(name));
+                _resourcesDropdown.options.Add(new TMP_Dropdown.OptionData(name));
             }
         }
         

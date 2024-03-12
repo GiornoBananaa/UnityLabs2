@@ -1,4 +1,4 @@
-﻿namespace Core
+﻿namespace UIController
 {
     public interface IUIController
     {

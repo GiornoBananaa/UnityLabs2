@@ -1,17 +1,21 @@
 using System.Collections.Generic;
 using EventSystem;
-using UnityEngine;
 
 namespace ResourceSystem
 {
-    public class ResourcePool: IResourcesRemovedEventListener,IResourcesAddEventListener
+    public class ResourcePool: IResourcesRemovedEventListener,IResourcesAddEventListener, IResetResourcesEventListener
     {
         private Dictionary<string, int> _resources;
         private ResourceModifiedEventSO _valueChangedEvent;
-
-        public ResourcePool(ResourceModifiedEventSO valueChangedEvent)
+        
+        public ResourcePool(ResourceModifiedEventSO valueChangedEvent, string[] resources)
         {
             _valueChangedEvent = valueChangedEvent;
+            _resources = new Dictionary<string, int>();
+            foreach (var resource in resources)
+            {
+                _resources.Add(resource,0);
+            }
         }
         
         public void Add(string name,int count)
@@ -24,26 +28,31 @@ namespace ResourceSystem
         {
             _resources[name] -= count;
             if (_resources[name] < 0) _resources[name] = 0;
+            _valueChangedEvent.Notify(name,_resources[name]);
         }
-
+        
         public void Reset()
         {
             foreach (var name in _resources.Keys)
             {
                 _resources[name] = 0;
+                _valueChangedEvent.Notify(name,0);
             }
         }
-
-
-        public void OnGameEvent(string value1, int value2)
+        
+        void  IResourcesAddEventListener.OnGameEvent(string value1, int value2)
         {
-            throw new System.NotImplementedException();
+            Add(value1,value2);
         }
-    }
-    
-    [CreateAssetMenu(fileName = "ResourcesDataSO", menuName = "SO/Resources Data")]
-    public class ResourcesDataSO : ScriptableObject
-    {
-        [field: SerializeField] public string[] Resources { get; private set; }
+        
+        void IResourcesRemovedEventListener.OnGameEvent(string value1, int value2)
+        {
+            Remove(value1,value2);
+        }
+        
+        void IResetResourcesEventListener.OnGameEvent()
+        {
+            Reset();
+        }
     }
 }
