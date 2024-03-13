@@ -7,7 +7,9 @@ namespace WarriorSystem
     {
         private IAttackStrategy _attackStrategy;
         private Animator _animator;
-
+        
+        // Внедрение зависимостей: через конструктор
+        // И это правильно!
         public AttackPerformer(Animator animator)
         {
             _animator = animator;

@@ -8,14 +8,25 @@ namespace WarriorSystem
 {
     public class AttackStrategySetter : MonoBehaviour
     {
+        /* Сериализованные поля заставляют вручную передовать сылки разыскивая обьекты в сцене,
+         есть возможность того, что поле равно null поетому нужна проверка.
+        */
+        
+        // Внедрение зависимости: через сериализованные поля
         [SerializeField] private RectTransform _buttonsLayout;
         [SerializeField] private GameObject _buttonPrefab;
         [SerializeField] private ColorBlock _chosenButtonColors;
+        
         private AttackPerformer _attackPerformer;
         private List<Button> _buttons;
         private Button _chosenButton;
         private ColorBlock _defaultButtonColors;
         
+        /* Методы прокидывающие зависимости вынуждают помнить о том,
+         что их вообще надо вызвать, кроме того они дают клиенту возможность 
+         когда угодно переопределить зависимости в runtime что может вызвать проблемы.*/
+        
+        // Внедрение зависимости: через метод
         public void Construct(AttackPerformer attackPerformer)
         {
             _attackPerformer = attackPerformer;
