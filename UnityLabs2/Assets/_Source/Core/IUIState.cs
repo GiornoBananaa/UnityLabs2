@@ -1,5 +1,3 @@
-using System;
-
 namespace Core
 {
     public interface IUIState
@@ -7,10 +5,5 @@ namespace Core
         void SetOwner(IUIStateMachine owner);
         void Enter();
         void Exit();
-    }
-
-    public interface IUIStateMachine
-    {
-        void SwitchState<T>() where T : IUIState;
     }
 }
