@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b297519172467c881ed92bef079c2a, type: 3}
+  m_Name: CryptoExchangeDataSO
+  m_EditorClassIdentifier: 
+  <Crypts>k__BackingField:
+  - {fileID: 11400000, guid: 76a54947ae19e504fa59c6d513d83921, type: 2}
+  - {fileID: 11400000, guid: 9aa0153348d6ac341a0b87c198da403e, type: 2}
+  - {fileID: 11400000, guid: 6c44fd03ce3dc82408c1b23bf6ba3f80, type: 2}
+  - {fileID: 11400000, guid: 42f727efac42b1048a1d96b03ef19d5a, type: 2}
+  - {fileID: 11400000, guid: abea21e3a749ac24aa4901df9a58d2c7, type: 2}
+  <StartBalance>k__BackingField: 15
